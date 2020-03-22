@@ -1,3 +1,4 @@
+"use strict";
 /*Unknown Type :-
   You can assign any type value in type unknown. But you can't assign any unknown value into string;
   let userInput: unknown;
