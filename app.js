@@ -1,1 +1,5 @@
-console.log("Your code goes here...");
+var person = {
+    name: "Max",
+    age: 30
+};
+console.log(person.age);
