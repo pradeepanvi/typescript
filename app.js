@@ -1,11 +1,17 @@
-/*Function Return Types & Void :-
-  It's normal function by default return void
+/*Unknown Type :-
+  You can assign any type value in type unknown. But you can't assign any unknown value into string;
+  let userInput: unknown;
+  let userName: string;
+  //You can use this
+  userInput = 5;
+  userInput = "Max";
+
+  // It will throw error
+  userName = userInput;
+
 }
 */
-function add(n1, n2) {
-    return n1 + n2;
-}
-function printResult(num) {
-    console.log("Result: " + num);
-}
-printResult(add(5, 12));
+var userInput;
+var userName;
+userInput = 5;
+userInput = "Max";
