@@ -1,8 +1,3 @@
-/*Literal Type :-
-  It's same kind of Union Type but here need to add one extra parameter.
-  function combine(number | string, number | string, 'as-number' | 'as-text'){}
-}
-*/
 function combine(input1, input2, resultConversion) {
     var result;
     if ((typeof input1 === "number" && typeof input2 === "number") ||

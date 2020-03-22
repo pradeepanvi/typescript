@@ -1,12 +1,18 @@
-/*Literal Type :-
-  It's same kind of Union Type but here need to add one extra parameter.
-  function combine(number | string, number | string, 'as-number' | 'as-text'){}
+/*Type Aliases/Custom Type :-
+  We can also use multiple type in one type
+  type Combinable = number | string;
+  function combine(
+    input1: Combinable,
+  ){}
 }
 */
+type Combinable = number | string;
+type ConversionDescriptor = "as-number" | "as-text";
+
 function combine(
-  input1: number | string,
-  input2: number | string,
-  resultConversion: "as-number" | "as-text"
+  input1: Combinable,
+  input2: Combinable,
+  resultConversion: ConversionDescriptor
 ) {
   let result;
   if (
