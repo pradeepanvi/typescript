@@ -1,15 +1,11 @@
-function combine(input1, input2, resultConversion) {
-    var result;
-    if ((typeof input1 === "number" && typeof input2 === "number") ||
-        resultConversion === "as-number") {
-        result = +input1 + +input2;
-    }
-    else {
-        result = input1.toString() + input2.toString();
-    }
-    return result;
+/*Function Return Types & Void :-
+  It's normal function by default return void
 }
-var combineAges = combine(30, 26, "as-number");
-console.log(combineAges);
-var combineNames = combine("Max", "Kumar", "as-text");
-console.log(combineNames);
+*/
+function add(n1, n2) {
+    return n1 + n2;
+}
+function printResult(num) {
+    console.log("Result: " + num);
+}
+printResult(add(5, 12));
