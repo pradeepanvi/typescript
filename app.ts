@@ -1,22 +1,20 @@
-/*Enum :- 
-  If you want number like
-  ADMIN = 0,
-  READ_ONLY = 1,
-  AUTHOR = 2
-  So here is the latest type of TypeScript Enum there user can add only values and number will be append automatically.
+/*Union Type :- 
+  A parameter in function can be assign with multiple type.
+  function combine(number | string, number | string){}
 }
 */
-enum Role {
-  ADMIN,
-  READ_ONLY,
-  AUTHOR
+function combine(input1: number | string, input2: number | string) {
+  let result;
+  if (typeof input1 === "number" && typeof input2 === "number") {
+    result = input1 + input2;
+  } else {
+    result = input1.toString() + input2.toString();
+  }
+  return result;
 }
 
-const person = {
-  name: "Max",
-  age: 30,
-  hobbies: ["Sports", "Football"],
-  role: Role.READ_ONLY
-};
+const combineAges = combine(30, 26);
+console.log(combineAges);
 
-console.log(person);
+const combineNames = combine("Max", "Kumar");
+console.log(combineNames);
