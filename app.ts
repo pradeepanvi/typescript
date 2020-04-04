@@ -1,18 +1,11 @@
-/*Unknown Type :-
-  You can assign any type value in type unknown. But you can't assign any unknown value into string;
-  let userInput: unknown;
-  let userName: string;
-  //You can use this
-  userInput = 5;
-  userInput = "Max";
+/* First Class Function: Function treated as a variable and can be use multiple time with parameter. */
+class Department {
+  name: string;
 
-  // It will throw error
-  userName = userInput;
-
+  constructor(n: string) {
+    this.name = n;
+  }
 }
-*/
-let userInput: unknown;
-let userName: string;
 
-userInput = 5;
-userInput = "Max";
+const accounting = new Department("Accounting");
+console.log(accounting);

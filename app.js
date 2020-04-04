@@ -1,18 +1,10 @@
 "use strict";
-/*Unknown Type :-
-  You can assign any type value in type unknown. But you can't assign any unknown value into string;
-  let userInput: unknown;
-  let userName: string;
-  //You can use this
-  userInput = 5;
-  userInput = "Max";
-
-  // It will throw error
-  userName = userInput;
-
-}
-*/
-var userInput;
-var userName;
-userInput = 5;
-userInput = "Max";
+/* First Class Function: Function treated as a variable and can be use multiple time with parameter. */
+var Department = /** @class */ (function () {
+    function Department(n) {
+        this.name = n;
+    }
+    return Department;
+}());
+var accounting = new Department("Accounting");
+console.log(accounting);
