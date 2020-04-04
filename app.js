@@ -1,7 +1,19 @@
 "use strict";
-/*  "readonly" property :
-    readonly in public:- user can access public value outside but can't change.
-    readonly in private:- user can access private value inside value but can't change.
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/*  Inheritance :
+    You can make another class with parent class also can use extra features with using super()
 */
 var Department = /** @class */ (function () {
     //here we have to defined public as well, because it won't take
@@ -24,11 +36,23 @@ var Department = /** @class */ (function () {
     };
     return Department;
 }());
-var accounting = new Department("d1", "Accounting");
-accounting.addEmployee("Max");
-accounting.addEmployee("Hanna");
-accounting.describe();
+var ITDepartment = /** @class */ (function (_super) {
+    __extends(ITDepartment, _super);
+    function ITDepartment(id, admins) {
+        return _super.call(this, id, "IT") || this;
+    }
+    return ITDepartment;
+}(Department));
+var it = new ITDepartment("d1", ["Max"]);
+it.addEmployee("Max");
+it.addEmployee("Hanna");
+it.describe();
 //Department: (d1) : Accounting
-accounting.printEmployeeInformation();
+it.printEmployeeInformation();
 // 2
 // app.js:20 (2) ["Max", "Hanna"]
+console.log(it);
+// ITDepartment {id: "d1", name: "IT", employees: Array(2)}
+// id: "d1"
+// name: "IT"
+// employees: (2) ["Max", "Hanna"]

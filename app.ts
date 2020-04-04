@@ -1,6 +1,5 @@
-/*  "readonly" property : 
-    readonly in public:- user can access public value outside but can't change.
-    readonly in private:- user can access private value inside value but can't change.
+/*  Inheritance : 
+    You can make another class with parent class also can use extra features with using super()
 */
 class Department {
   private employees: string[] = [];
@@ -24,13 +23,24 @@ class Department {
   }
 }
 
-const accounting = new Department("d1", "Accounting");
+class ITDepartment extends Department {
+  constructor(id: string, admins: string[]) {
+    super(id, "IT");
+  }
+}
 
-accounting.addEmployee("Max");
-accounting.addEmployee("Hanna");
+const it = new ITDepartment("d1", ["Max"]);
 
-accounting.describe();
+it.addEmployee("Max");
+it.addEmployee("Hanna");
+
+it.describe();
 //Department: (d1) : Accounting
-accounting.printEmployeeInformation();
+it.printEmployeeInformation();
 // 2
 // app.js:20 (2) ["Max", "Hanna"]
+console.log(it);
+// ITDepartment {id: "d1", name: "IT", employees: Array(2)}
+// id: "d1"
+// name: "IT"
+// employees: (2) ["Max", "Hanna"]
