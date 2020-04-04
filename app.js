@@ -12,8 +12,8 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-/*  Inheritance :
-    You can make another class with parent class also can use extra features with using super()
+/*  Overriding Properties & The "protected" Modifier :
+    protected is same like private but here you can override value;
 */
 var Department = /** @class */ (function () {
     //here we have to defined public as well, because it won't take
@@ -41,6 +41,12 @@ var ITDepartment = /** @class */ (function (_super) {
     function ITDepartment(id, admins) {
         return _super.call(this, id, "IT") || this;
     }
+    ITDepartment.prototype.addEmployee = function (name) {
+        if (name === "Max") {
+            return;
+        }
+        this.employees.push(name);
+    };
     return ITDepartment;
 }(Department));
 var it = new ITDepartment("d1", ["Max"]);

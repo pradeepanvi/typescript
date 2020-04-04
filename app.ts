@@ -1,8 +1,8 @@
-/*  Inheritance : 
-    You can make another class with parent class also can use extra features with using super()
+/*  Overriding Properties & The "protected" Modifier : 
+    protected is same like private but here you can override value;
 */
 class Department {
-  private employees: string[] = [];
+  protected employees: string[] = [];
 
   //here we have to defined public as well, because it won't take
   constructor(private readonly id: string, public name: string) {}
@@ -26,6 +26,13 @@ class Department {
 class ITDepartment extends Department {
   constructor(id: string, admins: string[]) {
     super(id, "IT");
+  }
+
+  addEmployee(name: string) {
+    if (name === "Max") {
+      return;
+    }
+    this.employees.push(name);
   }
 }
 
