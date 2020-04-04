@@ -1,9 +1,8 @@
 /*  "private" and "public" Access Modifiers: 
-    public means you can access and modify outside and its a default property */
+    private means you can access and modify inside function only */
 class Department {
   name: string;
-  employees: string[] = [];
-  //public employees: string[] = [];
+  private employees: string[] = [];
 
   constructor(n: string) {
     this.name = n;
@@ -28,8 +27,6 @@ const accounting = new Department("Accounting");
 
 accounting.addEmployee("Max");
 accounting.addEmployee("Hanna");
-
-accounting.employees[2] = "Anna";
 
 accounting.describe();
 accounting.printEmployeeInformation();

@@ -1,8 +1,7 @@
 "use strict";
 /*  "private" and "public" Access Modifiers:
-    public means you can access and modify outside and its a default property */
+    private means you can access and modify inside function only */
 var Department = /** @class */ (function () {
-    //public employees: string[] = [];
     function Department(n) {
         this.employees = [];
         this.name = n;
@@ -23,6 +22,5 @@ var Department = /** @class */ (function () {
 var accounting = new Department("Accounting");
 accounting.addEmployee("Max");
 accounting.addEmployee("Hanna");
-accounting.employees[2] = "Anna";
 accounting.describe();
 accounting.printEmployeeInformation();
