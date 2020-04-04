@@ -12,8 +12,9 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-/*  Overriding Properties & The "protected" Modifier :
-    protected is same like private but here you can override value;
+/*  Getters & Setters :
+    Getters :- means you can get all values of any variable with using get.
+    Setters :- means you can set any value in any variable with using set.
 */
 var Department = /** @class */ (function () {
     //here we have to defined public as well, because it won't take
@@ -36,29 +37,52 @@ var Department = /** @class */ (function () {
     };
     return Department;
 }());
-var ITDepartment = /** @class */ (function (_super) {
-    __extends(ITDepartment, _super);
-    function ITDepartment(id, admins) {
-        return _super.call(this, id, "IT") || this;
+var AccountingDepartment = /** @class */ (function (_super) {
+    __extends(AccountingDepartment, _super);
+    function AccountingDepartment(id, reports) {
+        var _this = _super.call(this, id, "Accounting") || this;
+        _this.reports = reports;
+        _this.lastReport = reports[0];
+        return _this;
     }
-    ITDepartment.prototype.addEmployee = function (name) {
+    Object.defineProperty(AccountingDepartment.prototype, "mostRecentReport", {
+        //Getters
+        get: function () {
+            if (this.lastReport) {
+                return this.lastReport;
+            }
+            throw new Error("No Report found");
+        },
+        //Setters
+        set: function (value) {
+            if (!value) {
+                throw new Error("Please pass in a valid value");
+            }
+            this.addReport(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    AccountingDepartment.prototype.addEmployee = function (name) {
         if (name === "Max") {
             return;
         }
         this.employees.push(name);
     };
-    return ITDepartment;
+    AccountingDepartment.prototype.addReport = function (text) {
+        this.reports.push(text);
+        this.lastReport = text;
+    };
+    return AccountingDepartment;
 }(Department));
-var it = new ITDepartment("d1", ["Max"]);
-it.addEmployee("Max");
-it.addEmployee("Hanna");
-it.describe();
-//Department: (d1) : Accounting
-it.printEmployeeInformation();
-// 2
-// app.js:20 (2) ["Max", "Hanna"]
-console.log(it);
-// ITDepartment {id: "d1", name: "IT", employees: Array(2)}
-// id: "d1"
-// name: "IT"
-// employees: (2) ["Max", "Hanna"]
+var accounting = new AccountingDepartment("d2", []);
+// console.log(accounting.mostRecentReport);
+// app.js:52 Uncaught Error: No Report found
+//     at AccountingDepartment.get [as mostRecentReport] (app.js:52)
+//     at app.js:70
+// accounting.addReport("Something");
+// console.log(accounting.mostRecentReport);
+// Something;
+accounting.mostRecentReport = "Max";
+console.log(accounting.mostRecentReport);
+// Max;

@@ -1,5 +1,6 @@
-/*  Overriding Properties & The "protected" Modifier : 
-    protected is same like private but here you can override value;
+/*  Getters & Setters : 
+    Getters :- means you can get all values of any variable with using get.
+    Setters :- means you can set any value in any variable with using set.
 */
 class Department {
   protected employees: string[] = [];
@@ -23,9 +24,28 @@ class Department {
   }
 }
 
-class ITDepartment extends Department {
-  constructor(id: string, admins: string[]) {
-    super(id, "IT");
+class AccountingDepartment extends Department {
+  private lastReport: string;
+
+  //Getters
+  get mostRecentReport() {
+    if (this.lastReport) {
+      return this.lastReport;
+    }
+    throw new Error("No Report found");
+  }
+
+  //Setters
+  set mostRecentReport(value: string) {
+    if (!value) {
+      throw new Error("Please pass in a valid value");
+    }
+    this.addReport(value);
+  }
+
+  constructor(id: string, private reports: string[]) {
+    super(id, "Accounting");
+    this.lastReport = reports[0];
   }
 
   addEmployee(name: string) {
@@ -34,20 +54,22 @@ class ITDepartment extends Department {
     }
     this.employees.push(name);
   }
+
+  addReport(text: string) {
+    this.reports.push(text);
+    this.lastReport = text;
+  }
 }
 
-const it = new ITDepartment("d1", ["Max"]);
+const accounting = new AccountingDepartment("d2", []);
+// console.log(accounting.mostRecentReport);
+// app.js:52 Uncaught Error: No Report found
+//     at AccountingDepartment.get [as mostRecentReport] (app.js:52)
+//     at app.js:70
 
-it.addEmployee("Max");
-it.addEmployee("Hanna");
-
-it.describe();
-//Department: (d1) : Accounting
-it.printEmployeeInformation();
-// 2
-// app.js:20 (2) ["Max", "Hanna"]
-console.log(it);
-// ITDepartment {id: "d1", name: "IT", employees: Array(2)}
-// id: "d1"
-// name: "IT"
-// employees: (2) ["Max", "Hanna"]
+// accounting.addReport("Something");
+// console.log(accounting.mostRecentReport);
+// Something;
+accounting.mostRecentReport = "Max";
+console.log(accounting.mostRecentReport);
+// Max;
