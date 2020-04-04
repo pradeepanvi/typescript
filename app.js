@@ -1,13 +1,15 @@
 "use strict";
-/*  "private" and "public" Access Modifiers:
-    private means you can access and modify inside function only */
+/*  Shorthand Initialization:
+    public and private we can defined with other way as well */
 var Department = /** @class */ (function () {
-    function Department(n) {
+    //here we have to defined public as well, because it won't take
+    function Department(id, name) {
+        this.id = id;
+        this.name = name;
         this.employees = [];
-        this.name = n;
     }
     Department.prototype.describe = function () {
-        console.log("Department: " + this.name);
+        console.log("Department: (" + this.id + ") : " + this.name);
     };
     Department.prototype.addEmployee = function (employee) {
         // validation etc
@@ -19,8 +21,11 @@ var Department = /** @class */ (function () {
     };
     return Department;
 }());
-var accounting = new Department("Accounting");
+var accounting = new Department("d1", "Accounting");
 accounting.addEmployee("Max");
 accounting.addEmployee("Hanna");
 accounting.describe();
+//Department: (d1) : Accounting
 accounting.printEmployeeInformation();
+// 2
+// app.js:20 (2) ["Max", "Hanna"]

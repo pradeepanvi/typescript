@@ -1,15 +1,13 @@
-/*  "private" and "public" Access Modifiers: 
-    private means you can access and modify inside function only */
+/*  Shorthand Initialization: 
+    public and private we can defined with other way as well */
 class Department {
-  name: string;
   private employees: string[] = [];
 
-  constructor(n: string) {
-    this.name = n;
-  }
+  //here we have to defined public as well, because it won't take
+  constructor(private id: string, public name: string) {}
 
   describe() {
-    console.log("Department: " + this.name);
+    console.log(`Department: (${this.id}) : ${this.name}`);
   }
 
   addEmployee(employee: string) {
@@ -23,10 +21,13 @@ class Department {
   }
 }
 
-const accounting = new Department("Accounting");
+const accounting = new Department("d1", "Accounting");
 
 accounting.addEmployee("Max");
 accounting.addEmployee("Hanna");
 
 accounting.describe();
+//Department: (d1) : Accounting
 accounting.printEmployeeInformation();
+// 2
+// app.js:20 (2) ["Max", "Hanna"]
