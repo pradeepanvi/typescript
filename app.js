@@ -1,6 +1,8 @@
 "use strict";
-/*  Shorthand Initialization:
-    public and private we can defined with other way as well */
+/*  "readonly" property :
+    readonly in public:- user can access public value outside but can't change.
+    readonly in private:- user can access private value inside value but can't change.
+*/
 var Department = /** @class */ (function () {
     //here we have to defined public as well, because it won't take
     function Department(id, name) {
@@ -13,6 +15,7 @@ var Department = /** @class */ (function () {
     };
     Department.prototype.addEmployee = function (employee) {
         // validation etc
+        // this.id = '3'  user will not able to add any value here
         this.employees.push(employee);
     };
     Department.prototype.printEmployeeInformation = function () {
