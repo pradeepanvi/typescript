@@ -1,12 +1,19 @@
-/*  Getters & Setters : 
-    Getters :- means you can get all values of any variable with using get.
-    Setters :- means you can set any value in any variable with using set.
-*/
+/*  Static Methods & Properties :
+    It means you can access this within class same class, but not able to access outside means after create new var.
+    Department.createEmployee('Max');
+    Department.firstYear;
+ */
 class Department {
+  static firstYear = 2020;
+
   protected employees: string[] = [];
 
   //here we have to defined public as well, because it won't take
   constructor(private readonly id: string, public name: string) {}
+
+  static createEmployee(name: string) {
+    return { name: name };
+  }
 
   describe() {
     console.log(`Department: (${this.id}) : ${this.name}`);
@@ -60,6 +67,9 @@ class AccountingDepartment extends Department {
     this.lastReport = text;
   }
 }
+
+const employee1 = Department.createEmployee("Max");
+console.log(employee1, Department.firstYear);
 
 const accounting = new AccountingDepartment("d2", []);
 // console.log(accounting.mostRecentReport);

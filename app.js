@@ -12,10 +12,11 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-/*  Getters & Setters :
-    Getters :- means you can get all values of any variable with using get.
-    Setters :- means you can set any value in any variable with using set.
-*/
+/*  Static Methods & Properties :
+    It means you can access this within class same class, but not able to access outside means after create new var.
+    Department.createEmployee('Max');
+    Department.firstYear;
+ */
 var Department = /** @class */ (function () {
     //here we have to defined public as well, because it won't take
     function Department(id, name) {
@@ -23,6 +24,9 @@ var Department = /** @class */ (function () {
         this.name = name;
         this.employees = [];
     }
+    Department.createEmployee = function (name) {
+        return { name: name };
+    };
     Department.prototype.describe = function () {
         console.log("Department: (" + this.id + ") : " + this.name);
     };
@@ -35,6 +39,7 @@ var Department = /** @class */ (function () {
         console.log(this.employees.length);
         console.log(this.employees);
     };
+    Department.firstYear = 2020;
     return Department;
 }());
 var AccountingDepartment = /** @class */ (function (_super) {
@@ -75,6 +80,8 @@ var AccountingDepartment = /** @class */ (function (_super) {
     };
     return AccountingDepartment;
 }(Department));
+var employee1 = Department.createEmployee("Max");
+console.log(employee1, Department.firstYear);
 var accounting = new AccountingDepartment("d2", []);
 // console.log(accounting.mostRecentReport);
 // app.js:52 Uncaught Error: No Report found
