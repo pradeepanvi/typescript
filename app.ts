@@ -5,11 +5,11 @@ interface Named {
   readonly name: string;
 }
 
-interface Greetable {
+interface Greetable extends Named {
   greet(pharse: string): void;
 }
 
-class Person implements Greetable, Named {
+class Person implements Greetable {
   name: string;
   age = 30;
 
