@@ -27,9 +27,6 @@ var Department = /** @class */ (function () {
     Department.createEmployee = function (name) {
         return { name: name };
     };
-    Department.prototype.describe = function () {
-        console.log("Department: (" + this.id + ") : " + this.name);
-    };
     Department.prototype.addEmployee = function (employee) {
         // validation etc
         // this.id = '3'  user will not able to add any value here
@@ -68,6 +65,9 @@ var AccountingDepartment = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    AccountingDepartment.prototype.describe = function () {
+        console.log("Accounting Department - ID: " + this.id);
+    };
     AccountingDepartment.prototype.addEmployee = function (name) {
         if (name === "Max") {
             return;
@@ -83,13 +83,6 @@ var AccountingDepartment = /** @class */ (function (_super) {
 var employee1 = Department.createEmployee("Max");
 console.log(employee1, Department.firstYear);
 var accounting = new AccountingDepartment("d2", []);
-// console.log(accounting.mostRecentReport);
-// app.js:52 Uncaught Error: No Report found
-//     at AccountingDepartment.get [as mostRecentReport] (app.js:52)
-//     at app.js:70
-// accounting.addReport("Something");
-// console.log(accounting.mostRecentReport);
-// Something;
 accounting.mostRecentReport = "Max";
 console.log(accounting.mostRecentReport);
-// Max;
+accounting.describe();

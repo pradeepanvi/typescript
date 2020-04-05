@@ -3,21 +3,19 @@
     Department.createEmployee('Max');
     Department.firstYear;
  */
-class Department {
+abstract class Department {
   static firstYear = 2020;
 
   protected employees: string[] = [];
 
   //here we have to defined public as well, because it won't take
-  constructor(private readonly id: string, public name: string) {}
+  constructor(protected readonly id: string, public name: string) {}
 
   static createEmployee(name: string) {
     return { name: name };
   }
 
-  describe() {
-    console.log(`Department: (${this.id}) : ${this.name}`);
-  }
+  abstract describe(this: Department): void;
 
   addEmployee(employee: string) {
     // validation etc
@@ -55,6 +53,10 @@ class AccountingDepartment extends Department {
     this.lastReport = reports[0];
   }
 
+  describe() {
+    console.log("Accounting Department - ID: " + this.id);
+  }
+
   addEmployee(name: string) {
     if (name === "Max") {
       return;
@@ -72,14 +74,6 @@ const employee1 = Department.createEmployee("Max");
 console.log(employee1, Department.firstYear);
 
 const accounting = new AccountingDepartment("d2", []);
-// console.log(accounting.mostRecentReport);
-// app.js:52 Uncaught Error: No Report found
-//     at AccountingDepartment.get [as mostRecentReport] (app.js:52)
-//     at app.js:70
-
-// accounting.addReport("Something");
-// console.log(accounting.mostRecentReport);
-// Something;
 accounting.mostRecentReport = "Max";
 console.log(accounting.mostRecentReport);
-// Max;
+accounting.describe();
