@@ -1,7 +1,6 @@
-/*  Static Methods & Properties :
-    It means you can access this within class same class, but not able to access outside means after create new var.
-    Department.createEmployee('Max');
-    Department.firstYear;
+/*  Singletons & Private Constructors :
+    Singletons is a design pattern for use inside of a function
+    Private Constructors that can be no longer use to constructor outside of a class
  */
 abstract class Department {
   static firstYear = 2020;
@@ -31,6 +30,7 @@ abstract class Department {
 
 class AccountingDepartment extends Department {
   private lastReport: string;
+  private static instance: AccountingDepartment;
 
   //Getters
   get mostRecentReport() {
@@ -48,9 +48,17 @@ class AccountingDepartment extends Department {
     this.addReport(value);
   }
 
-  constructor(id: string, private reports: string[]) {
+  private constructor(id: string, private reports: string[]) {
     super(id, "Accounting");
     this.lastReport = reports[0];
+  }
+
+  static getInstance() {
+    if (AccountingDepartment.instance) {
+      return this.instance;
+    }
+    this.instance = new AccountingDepartment("d2", []);
+    return this.instance;
   }
 
   describe() {
@@ -73,7 +81,6 @@ class AccountingDepartment extends Department {
 const employee1 = Department.createEmployee("Max");
 console.log(employee1, Department.firstYear);
 
-const accounting = new AccountingDepartment("d2", []);
-accounting.mostRecentReport = "Max";
-console.log(accounting.mostRecentReport);
-accounting.describe();
+const accounting = AccountingDepartment.getInstance();
+
+console.log(accounting);

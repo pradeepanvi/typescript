@@ -12,10 +12,9 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-/*  Static Methods & Properties :
-    It means you can access this within class same class, but not able to access outside means after create new var.
-    Department.createEmployee('Max');
-    Department.firstYear;
+/*  Singletons & Private Constructors :
+    Singletons is a design pattern for use inside of a function
+    Private Constructors that can be no longer use to constructor outside of a class
  */
 var Department = /** @class */ (function () {
     //here we have to defined public as well, because it won't take
@@ -65,6 +64,13 @@ var AccountingDepartment = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    AccountingDepartment.getInstance = function () {
+        if (AccountingDepartment.instance) {
+            return this.instance;
+        }
+        this.instance = new AccountingDepartment("d2", []);
+        return this.instance;
+    };
     AccountingDepartment.prototype.describe = function () {
         console.log("Accounting Department - ID: " + this.id);
     };
@@ -82,7 +88,5 @@ var AccountingDepartment = /** @class */ (function (_super) {
 }(Department));
 var employee1 = Department.createEmployee("Max");
 console.log(employee1, Department.firstYear);
-var accounting = new AccountingDepartment("d2", []);
-accounting.mostRecentReport = "Max";
-console.log(accounting.mostRecentReport);
-accounting.describe();
+var accounting = AccountingDepartment.getInstance();
+console.log(accounting);
