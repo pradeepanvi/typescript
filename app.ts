@@ -2,21 +2,30 @@
     Interface just a structor for use javascript objects
 */
 
-interface Person {
+interface Greetable {
   name: string;
-  age: number;
 
   greet(pharse: string): void;
 }
 
-let user1: Person;
+class Person implements Greetable {
+  name: string;
+  age = 30;
 
-user1 = {
-  name: "Max",
-  age: 30,
+  constructor(n: string) {
+    this.name = n;
+  }
+
   greet(pharse: string) {
     console.log(pharse + " " + this.name);
-  },
-};
+  }
+}
+
+let user1: Greetable;
+
+user1 = new Person("Max");
 
 user1.greet("Hi there I am");
+console.log(user1);
+// Hi there I am Max
+// app.js: 18 Person { age: 30, name: "Max" }
