@@ -1,5 +1,5 @@
 "use strict";
-/*  Readonly Interface Properties :
+/*  Extending Interfaces :
  */
 var Person = /** @class */ (function () {
     function Person(n) {

@@ -1,13 +1,15 @@
-/*  Readonly Interface Properties :
+/*  Extending Interfaces :
  */
 
-interface Greetable {
+interface Named {
   readonly name: string;
+}
 
+interface Greetable {
   greet(pharse: string): void;
 }
 
-class Person implements Greetable {
+class Person implements Greetable, Named {
   name: string;
   age = 30;
 
