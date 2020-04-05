@@ -1,5 +1,5 @@
 "use strict";
-/*  Interfaces as Function Types :
+/*  Optional Parameters & Properties :
  */
 var add;
 add = function (n1, n2) {
@@ -8,10 +8,17 @@ add = function (n1, n2) {
 var Person = /** @class */ (function () {
     function Person(n) {
         this.age = 30;
-        this.name = n;
+        if (n) {
+            this.name = n;
+        }
     }
     Person.prototype.greet = function (pharse) {
-        console.log(pharse + " " + this.name);
+        if (this.name) {
+            console.log(pharse + " " + this.name);
+        }
+        else {
+            console.log("Hi!");
+        }
     };
     return Person;
 }());

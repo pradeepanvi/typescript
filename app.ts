@@ -1,4 +1,4 @@
-/*  Interfaces as Function Types :
+/*  Optional Parameters & Properties :
  */
 
 // type AddFn = (a: number, b: number) => number;
@@ -13,7 +13,8 @@ add = (n1: number, n2: number) => {
 };
 
 interface Named {
-  readonly name: string;
+  readonly name?: string;
+  outputName?: string;
 }
 
 interface Greetable extends Named {
@@ -21,15 +22,21 @@ interface Greetable extends Named {
 }
 
 class Person implements Greetable {
-  name: string;
+  name?: string;
   age = 30;
 
   constructor(n: string) {
-    this.name = n;
+    if (n) {
+      this.name = n;
+    }
   }
 
   greet(pharse: string) {
-    console.log(pharse + " " + this.name);
+    if (this.name) {
+      console.log(pharse + " " + this.name);
+    } else {
+      console.log("Hi!");
+    }
   }
 }
 
