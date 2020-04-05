@@ -1,9 +1,8 @@
-/*  A First Interface :
-    Interface just a structor for use javascript objects
-*/
+/*  Readonly Interface Properties :
+ */
 
 interface Greetable {
-  name: string;
+  readonly name: string;
 
   greet(pharse: string): void;
 }
@@ -24,6 +23,7 @@ class Person implements Greetable {
 let user1: Greetable;
 
 user1 = new Person("Max");
+// user1.name = 'Sam'; // you can't add this now
 
 user1.greet("Hi there I am");
 console.log(user1);
