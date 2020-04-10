@@ -1,12 +1,12 @@
 "use strict";
-/*  Index Properties :
+/*  Function Overloads :
  */
-// const userInputElement = <HTMLInputElement>(
-//   document.getElementById("user-input")!
-// );
-var userInputElement = document.getElementById("user-input");
-userInputElement.value = "Hi there!";
-var errorBag = {
-    email: "Not a valid email!",
-    username: "Must start with a capital character!",
-};
+// If we will not user above function than split will not work
+function add(a, b) {
+    if (typeof a === "string" || typeof b === "string") {
+        return a.toString() + b.toString();
+    }
+    return a + b;
+}
+var result = add("Max", "Same");
+result.split(" ");
