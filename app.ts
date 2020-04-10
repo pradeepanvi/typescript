@@ -1,4 +1,4 @@
-/*  Function Overloads :
+/*  Optional Chaining :
  */
 
 type Combinable = string | number;
@@ -17,3 +17,11 @@ function add(a: Combinable, b: Combinable) {
 
 const result = add("Max", "Same");
 result.split(" ");
+
+const fetchedUserData = {
+  id: "u1",
+  name: "Max",
+  job: { title: "CEO" },
+};
+
+console.log(fetchedUserData?.job?.title);
