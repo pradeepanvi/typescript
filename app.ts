@@ -1,4 +1,5 @@
-/*  Optional Chaining :
+/*  Nullish Coalescing :
+    userInput ?? "DEFAULT" If userInput value will be undefined or null than the DEFAULT value will show.
  */
 
 type Combinable = string | number;
@@ -25,3 +26,9 @@ const fetchedUserData = {
 };
 
 console.log(fetchedUserData?.job?.title);
+
+// const userInput = "";
+const userInput = undefined;
+const storedData = userInput ?? "DEFAULT";
+
+console.log(storedData);
