@@ -1,14 +1,8 @@
-/*  Built-in Generics & What are Generics? :
-    Whenever you see Array or Promise <any>
+/*  Creating a Generic Function :
  */
 
-const names: Array<string> = []; // string []
-names[0].split(" ");
+function merge<T, U>(objA: T, objB: U): T & U {
+  return Object.assign(objA, objB);
+}
 
-const promise: Promise<number> = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(10);
-  }, 2000);
-});
-
-promise.then((data) => {});
+const mergeObj = merge({ name: "Pradeep" }, { age: 30 });
