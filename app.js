@@ -1,18 +1,15 @@
 "use strict";
-/*  Intersection Types :
+/*  Discriminated Unions :
  */
-/* This is Javascript type same as interface*/
-// type Admin = {
-//   name: string;
-//   privileges: string[];
-// };
-// type Employee = {
-//   name: string;
-//   startDate: Date;
-// };
-// type ElevatedEmployee = Admin & Employee;
-var e1 = {
-    name: "Max",
-    privileges: ["create-server"],
-    startDate: new Date(),
-};
+function moveAnimation(animal) {
+    var speed;
+    switch (animal.type) {
+        case "bird":
+            speed = animal.flyingSpeed;
+            break;
+        case "horse":
+            speed = animal.flyingSpeed;
+    }
+    console.log("Moving at Speed: " + speed);
+}
+moveAnimation({ type: "bird", flyingSpeed: 10 });

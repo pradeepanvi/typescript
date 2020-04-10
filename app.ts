@@ -1,33 +1,28 @@
-/*  Intersection Types :
+/*  Discriminated Unions :
  */
 
-interface Admin {
-  name: string;
-  privileges: string[];
+interface Bird {
+  type: "bird";
+  flyingSpeed: number;
 }
 
-interface Employee {
-  name: string;
-  startDate: Date;
+interface Horse {
+  type: "horse";
+  flyingSpeed: number;
 }
 
-interface ElevatedEmployee extends Admin, Employee {}
+type Animal = Bird | Horse;
 
-/* This is Javascript type same as interface*/
-// type Admin = {
-//   name: string;
-//   privileges: string[];
-// };
+function moveAnimation(animal: Animal) {
+  let speed;
+  switch (animal.type) {
+    case "bird":
+      speed = animal.flyingSpeed;
+      break;
+    case "horse":
+      speed = animal.flyingSpeed;
+  }
+  console.log("Moving at Speed: " + speed);
+}
 
-// type Employee = {
-//   name: string;
-//   startDate: Date;
-// };
-
-// type ElevatedEmployee = Admin & Employee;
-
-const e1: ElevatedEmployee = {
-  name: "Max",
-  privileges: ["create-server"],
-  startDate: new Date(),
-};
+moveAnimation({ type: "bird", flyingSpeed: 10 });
