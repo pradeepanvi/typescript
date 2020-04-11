@@ -1,5 +1,5 @@
 "use strict";
-/*  03 Working with Decorator Factories :
+/*  04 Building More Useful Decorators :
  */
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -13,13 +13,22 @@ function Logger(logString) {
         console.log(constructor);
     };
 }
+function WithTemplate(template, hookId) {
+    return function (_) {
+        var hookEl = document.getElementById(hookId);
+        if (hookEl) {
+            hookEl.innerHTML = template;
+        }
+    };
+}
+// @Logger('LOGGING - PERSON')
 var Person = /** @class */ (function () {
     function Person() {
         this.name = 'Max';
         console.log('Creating person object...');
     }
     Person = __decorate([
-        Logger('LOGGING - PERSON')
+        WithTemplate('<h1>My Person Object</h1>', 'app')
     ], Person);
     return Person;
 }());
