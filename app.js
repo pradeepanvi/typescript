@@ -1,5 +1,6 @@
 "use strict";
-/*  04 Building More Useful Decorators :
+/*  05 Adding Multiple Decorators :
+    Multiple Decorators will start from bottom to top excuating.
  */
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -15,6 +16,7 @@ function Logger(logString) {
 }
 function WithTemplate(template, hookId) {
     return function (constructor) {
+        console.log('Rendering template');
         var hookEl = document.getElementById(hookId);
         var p = new constructor();
         if (hookEl) {
@@ -23,21 +25,23 @@ function WithTemplate(template, hookId) {
         }
     };
 }
-// @Logger('LOGGING - PERSON')
 var Person = /** @class */ (function () {
     function Person() {
         this.name = 'Max';
         console.log('Creating person object...');
     }
     Person = __decorate([
+        Logger('LOGGING - PERSON'),
         WithTemplate('<h1>My Person Object</h1>', 'app')
     ], Person);
     return Person;
 }());
 var pers = new Person();
-// LOGGING - PERSON
-// ƒ Person() {
+// Rendering template
+// app.js: 31 Creating person object...
+// app.js: 13 LOGGING - PERSON
+// app.js: 14 ƒ Person() {
 //   this.name = 'Max';
 //   console.log('Creating person object...');
 // }
-// Creating person object...
+// app.js: 31 Creating person object..

@@ -1,4 +1,5 @@
-/*  04 Building More Useful Decorators :
+/*  05 Adding Multiple Decorators :
+    Multiple Decorators will start from bottom to top excuating.    
  */
 
 function Logger(logString: string) {
@@ -10,6 +11,7 @@ function Logger(logString: string) {
 
 function WithTemplate(template: string, hookId: string) {
   return function (constructor: any) {
+    console.log('Rendering template')
     const hookEl = document.getElementById(hookId);
     const p = new constructor();
     if (hookEl) {
@@ -19,7 +21,7 @@ function WithTemplate(template: string, hookId: string) {
   }
 }
 
-// @Logger('LOGGING - PERSON')
+@Logger('LOGGING - PERSON')
 @WithTemplate('<h1>My Person Object</h1>', 'app')
 
 class Person {
@@ -31,9 +33,11 @@ class Person {
 
 const pers = new Person();
 
-// LOGGING - PERSON
-// ƒ Person() {
+// Rendering template
+// app.js: 31 Creating person object...
+// app.js: 13 LOGGING - PERSON
+// app.js: 14 ƒ Person() {
 //   this.name = 'Max';
 //   console.log('Creating person object...');
 // }
-// Creating person object...
+// app.js: 31 Creating person object..
