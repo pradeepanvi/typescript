@@ -1,10 +1,22 @@
-/*  Working with Constraints :
-    It will strict that only object will pass as a parameter
+/*  Another Generic Function :
  */
 
-function merge<T extends object, U extends object>(objA: T, objB: U): T & U {
-  return Object.assign(objA, objB);
+interface Lengthy {
+  length: number;
 }
 
-//const mergeObj = merge({ name: "Pradeep" }, 30); this won't work
-const mergeObj = merge({ name: "Pradeep" }, { age: 30 });
+function countAndDescribe<T extends Lengthy>(elements: T) {
+  let descriptionText = "Got no value.";
+  if (elements.length === 1) {
+    descriptionText = "Got 1 element.";
+  } else if (elements.length > 1) {
+    descriptionText = 'Got ' + elements.length + ' elements.'
+  }
+  return [elements, descriptionText];
+}
+
+console.log(countAndDescribe('Hi there!'));
+// Array(2)
+// 0: "Hi there!"
+// 1: "Got 9 elements."
+// length: 2

@@ -1,9 +1,18 @@
 "use strict";
-/*  Working with Constraints :
-    It will strict that only object will pass as a parameter
+/*  Another Generic Function :
  */
-function merge(objA, objB) {
-    return Object.assign(objA, objB);
+function countAndDescribe(elements) {
+    var descriptionText = "Got no value.";
+    if (elements.length === 1) {
+        descriptionText = "Got 1 element.";
+    }
+    else if (elements.length > 1) {
+        descriptionText = 'Got ' + elements.length + ' elements.';
+    }
+    return [elements, descriptionText];
 }
-//const mergeObj = merge({ name: "Pradeep" }, 30); this won't work
-var mergeObj = merge({ name: "Pradeep" }, { age: 30 });
+console.log(countAndDescribe('Hi there!'));
+// Array(2)
+// 0: "Hi there!"
+// 1: "Got 9 elements."
+// length: 2
