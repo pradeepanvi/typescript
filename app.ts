@@ -1,24 +1,20 @@
-/*  07 Generic Classes :
+/*  09 Generic Utility Types :
  */
 
-class DataStorage<T>{
-  private data: T[] = [];
-
-  addItem(item: T) {
-    this.data.push(item);
-  }
-
-  removeItem(item: T) {
-    this.data.splice(this.data.indexOf(item), 1);
-  }
-
-  getItems() {
-    return [...this.data];
-  }
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
 }
 
-const textStorage = new DataStorage<string>();
-textStorage.addItem('Max');
-textStorage.addItem('Pradeep');
-textStorage.removeItem('Max');
-console.log(textStorage.getItems());
+function createCourseGoal(
+  title: string,
+  description: string,
+  date: Date
+): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+  return courseGoal as CourseGoal;
+}
