@@ -1,43 +1,34 @@
-/*  05 Adding Multiple Decorators :
-    Multiple Decorators will start from bottom to top excuating.    
+/*  06 Diving into Property Decorators :
+
  */
 
-function Logger(logString: string) {
-  return function (constructor: Function) {
-    console.log(logString);
-    console.log(constructor);
-  }
+function Log(target: any, propertyName: string | Symbol) {
+  console.log('Property decorator!');
+  console.log(target, propertyName);
 }
 
-function WithTemplate(template: string, hookId: string) {
-  return function (constructor: any) {
-    console.log('Rendering template')
-    const hookEl = document.getElementById(hookId);
-    const p = new constructor();
-    if (hookEl) {
-      hookEl.innerHTML = template;
-      hookEl.querySelector('h1')!.textContent = p.name;
+class Product {
+  @Log
+  title: string;
+  private _price: number;
+
+  set price(val: number) {
+    if (val > 0) {
+      this._price = val;
+    } else {
+      throw new Error('Invalid price - should be positive!');
     }
   }
-}
 
-@Logger('LOGGING - PERSON')
-@WithTemplate('<h1>My Person Object</h1>', 'app')
+  constructor(t: string, p: number) {
+    this.title = t;
+    this._price = p;
+  }
 
-class Person {
-  name = 'Max';
-  constructor() {
-    console.log('Creating person object...');
+  getPriceWithTax(tax: number) {
+    return this.price * (1 + tax);
   }
 }
 
-const pers = new Person();
-
-// Rendering template
-// app.js: 31 Creating person object...
-// app.js: 13 LOGGING - PERSON
-// app.js: 14 ƒ Person() {
-//   this.name = 'Max';
-//   console.log('Creating person object...');
-// }
-// app.js: 31 Creating person object..
+// Property decorator!
+// app.js: 13 { getPriceWithTax: ƒ, constructor: ƒ } getPriceWithTax: ƒ(tax)constructor: ƒ Product(t, p)set price: ƒ(val)__proto__: Object "title"

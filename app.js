@@ -1,6 +1,6 @@
 "use strict";
-/*  05 Adding Multiple Decorators :
-    Multiple Decorators will start from bottom to top excuating.
+/*  06 Diving into Property Decorators :
+
  */
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -8,40 +8,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-function Logger(logString) {
-    return function (constructor) {
-        console.log(logString);
-        console.log(constructor);
-    };
+function Log(target, propertyName) {
+    console.log('Property decorator!');
+    console.log(target, propertyName);
 }
-function WithTemplate(template, hookId) {
-    return function (constructor) {
-        console.log('Rendering template');
-        var hookEl = document.getElementById(hookId);
-        var p = new constructor();
-        if (hookEl) {
-            hookEl.innerHTML = template;
-            hookEl.querySelector('h1').textContent = p.name;
-        }
-    };
-}
-var Person = /** @class */ (function () {
-    function Person() {
-        this.name = 'Max';
-        console.log('Creating person object...');
+var Product = /** @class */ (function () {
+    function Product(t, p) {
+        this.title = t;
+        this._price = p;
     }
-    Person = __decorate([
-        Logger('LOGGING - PERSON'),
-        WithTemplate('<h1>My Person Object</h1>', 'app')
-    ], Person);
-    return Person;
+    Object.defineProperty(Product.prototype, "price", {
+        set: function (val) {
+            if (val > 0) {
+                this._price = val;
+            }
+            else {
+                throw new Error('Invalid price - should be positive!');
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Product.prototype.getPriceWithTax = function (tax) {
+        return this.price * (1 + tax);
+    };
+    __decorate([
+        Log
+    ], Product.prototype, "title", void 0);
+    return Product;
 }());
-var pers = new Person();
-// Rendering template
-// app.js: 31 Creating person object...
-// app.js: 13 LOGGING - PERSON
-// app.js: 14 ƒ Person() {
-//   this.name = 'Max';
-//   console.log('Creating person object...');
-// }
-// app.js: 31 Creating person object..
+// Property decorator!
+// app.js: 13 { getPriceWithTax: ƒ, constructor: ƒ } getPriceWithTax: ƒ(tax)constructor: ƒ Product(t, p)set price: ƒ(val)__proto__: Object "title"
