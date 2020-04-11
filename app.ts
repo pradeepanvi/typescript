@@ -1,20 +1,25 @@
-/*  09 Generic Utility Types :
+/*  02 A First Class Decorator :
  */
 
-interface CourseGoal {
-  title: string;
-  description: string;
-  completeUntil: Date;
+function Logger(constructor: Function) {
+  console.log('Logging...');
+  console.log(constructor);
 }
 
-function createCourseGoal(
-  title: string,
-  description: string,
-  date: Date
-): CourseGoal {
-  let courseGoal: Partial<CourseGoal> = {};
-  courseGoal.title = title;
-  courseGoal.description = description;
-  courseGoal.completeUntil = date;
-  return courseGoal as CourseGoal;
+@Logger
+
+class Person {
+  name = 'Max';
+  constructor() {
+    console.log('Creating person object...');
+  }
 }
+
+const pers = new Person();
+
+// Logging...
+// ƒ Person() {
+//   this.name = 'Max';
+//   console.log('Creating person object...');
+// }
+// Creating person object...
