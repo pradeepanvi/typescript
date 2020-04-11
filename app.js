@@ -14,10 +14,12 @@ function Logger(logString) {
     };
 }
 function WithTemplate(template, hookId) {
-    return function (_) {
+    return function (constructor) {
         var hookEl = document.getElementById(hookId);
+        var p = new constructor();
         if (hookEl) {
             hookEl.innerHTML = template;
+            hookEl.querySelector('h1').textContent = p.name;
         }
     };
 }
