@@ -1,40 +1,37 @@
-/*  09 Returning and changing a Class in a :
-
+/*  11 Example Creating an Autobind :
+    Autobind decorator will be help to autobind this property to the class
  */
 
-function Logger(logString: string) {
-  return function (constructor: Function) {
-    console.log(logString);
-    console.log(constructor);
-  }
-}
-
-function WithTemplate(template: string, hookId: string) {
-  return function <T extends { new(...args: any[]): { name: string } }>(originalConstructor: T) {
-    return class extends originalConstructor {
-      constructor(..._: any[]) {
-        super();
-        console.log('Rendering template')
-        const hookEl = document.getElementById(hookId);
-        const p = new originalConstructor();
-        if (hookEl) {
-          hookEl.innerHTML = template;
-          hookEl.querySelector('h1')!.textContent = this.name;
-        }
-      }
+function Autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value;
+  const adjDescriptor: PropertyDescriptor = {
+    configurable: true,
+    enumerable: false,
+    get() {
+      const boundFn = originalMethod.bind(this);
+      return boundFn;
     }
   }
+  return adjDescriptor;
 }
 
-@Logger('LOGGING - PERSON')
-@WithTemplate('<h1>My Person Object</h1>', 'app')
+class Printer {
+  message = 'This works!';
 
-class Person {
-  name = 'Max';
-  constructor() {
-    console.log('Creating person object...');
+  // Before @autobind decorator show message value was coming undefined
+  @Autobind
+  showMessage() {
+    console.log(this.message);
   }
 }
 
-const pers = new Person();
-console.log(pers);
+const p = new Printer();
+
+const button = document.querySelector('button');
+button.addEventListener('click', p.showMessage);
+
+// Before @autobind 
+// undefined
+
+// After @autobind
+// This works!
