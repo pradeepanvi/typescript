@@ -1,8 +1,24 @@
-/*  06 The -keyof- Constraint :
+/*  07 Generic Classes :
  */
 
-function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U) {
-  return 'Value: ' + obj[key];
+class DataStorage<T>{
+  private data: T[] = [];
+
+  addItem(item: T) {
+    this.data.push(item);
+  }
+
+  removeItem(item: T) {
+    this.data.splice(this.data.indexOf(item), 1);
+  }
+
+  getItems() {
+    return [...this.data];
+  }
 }
-extractAndConvert({ name: 'Max' }, 'name');
-// "Value: Max"
+
+const textStorage = new DataStorage<string>();
+textStorage.addItem('Max');
+textStorage.addItem('Pradeep');
+textStorage.removeItem('Max');
+console.log(textStorage.getItems());
