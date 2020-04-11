@@ -1,37 +1,26 @@
-/*  11 Example Creating an Autobind :
-    Autobind decorator will be help to autobind this property to the class
+/*  Validation with Decorators - First Steps :
+
  */
 
-function Autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
-  const originalMethod = descriptor.value;
-  const adjDescriptor: PropertyDescriptor = {
-    configurable: true,
-    enumerable: false,
-    get() {
-      const boundFn = originalMethod.bind(this);
-      return boundFn;
-    }
-  }
-  return adjDescriptor;
-}
+class Course {
+  title: string;
+  price: number;
 
-class Printer {
-  message = 'This works!';
-
-  // Before @autobind decorator show message value was coming undefined
-  @Autobind
-  showMessage() {
-    console.log(this.message);
+  constructor(t: string, p: number) {
+    this.title = t;
+    this.price = p;
   }
 }
 
-const p = new Printer();
+const courseForm = document.querySelector('form')!;
+courseForm.addEventListener('submit', event => {
+  event.preventDefault();
+  const titleEl = document.getElementById('title') as HTMLInputElement;
+  const priceEl = document.getElementById('price') as HTMLInputElement;
 
-const button = document.querySelector('button');
-button.addEventListener('click', p.showMessage);
+  const title = titleEl.value;
+  const price = +priceEl.value;
 
-// Before @autobind 
-// undefined
-
-// After @autobind
-// This works!
+  const createCourse = new Course(title, price);
+  console.log(createCourse);
+})
